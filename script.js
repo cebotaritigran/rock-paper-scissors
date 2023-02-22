@@ -92,15 +92,19 @@ function game(human, computer, reuslt) {
     }
     let resultOfGame = reuslt;
     console.log(resultOfGame);
+    const you = document.querySelector('.you');
+    const computerTitle = document.querySelector('.computer');
     if (resultOfGame === "tie") {
         result.innerText = `TIE! Humans = ${humanScore} - Computers = ${computerScore}`;
     } else if (resultOfGame === "win") {
         humanScore++;
         console.log(humanScore);
+        you.innerText = `YOU:${humanScore} `
         result.innerText = `WIN! Humans = ${humanScore} - Computers = ${computerScore}`;
     } else if (resultOfGame === "lose") {
         computerScore++;
         console.log(computerScore);
+        computerTitle.innerText = `COMPUTER:${computerScore} `
         result.innerText = `LOSE! Humans = ${humanScore} - Computers = ${computerScore}`;
     } else {
         result.innerText = 'hmm'
