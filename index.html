@@ -1,13 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./script.js"></script>
-    <title>Document</title>
+    <script src="./script.js" defer></script>
+    <link rel="stylesheet" href="./style.css">
+    <title>Rock Paper Scissors</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    
+    <div class="title">ROCK PAPER SCISSORS</div>
+    <div class="container">
+        <div class="indication">
+            <div class="you">YOU:</div>
+            <div class="computer">COMPUTER:</div>
+        </div>
+        <div class="humanVsComputer">
+            <div class="humanChoice">
+                <button id="rock" class="humanButton" value="rock">Rock</button>
+                <button id="paper" class="humanButton" value="paper">Paper</button>
+                <button id="scissors" class="humanButton" value="scissors">Scissors</button>
+            </div>
+            <div class="computerChoice">
+                <div class="computerChoices" id="rockComputer">Rock</div>
+                <div class="computerChoices" id="paperComputer">Paper</div>
+                <div class="computerChoices" id="scissorsComputer">Scissors</div>
+            </div>
+        </div>
+        <div class="containerText">
+            <div class="result">
+                Whoever reaches to 5 points wins
+            </div>
+            <div class="playAgain"></div>
+        </div>
+    </div>
 </body>
+
 </html>

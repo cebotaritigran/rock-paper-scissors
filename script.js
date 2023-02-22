@@ -15,35 +15,53 @@
     play the round 5 times with giving scores whoever wins
 */
 
-function getHumanChoice() {
-    let humanChoice = prompt("please enter rock, paper or scissors");
+
+let humanScore = 0;
+let computerScore = 0;
+let bestOfFive = 0;
+
+function getHumanChoice(buttonChoice) {
+    let humanChoice = buttonChoice;
     humanChoice = humanChoice.toLowerCase();
     humanChoice = humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1);
     return humanChoice;
 }
 
+
 function getComputerChoice() {
+    const rock = document.querySelector('#rockComputer');
+    const paper = document.querySelector('#paperComputer');
+    const scissors = document.querySelector('#scissorsComputer');
+    rock.classList.remove('selected');
+    paper.classList.remove('selected');
+    scissors.classList.remove('selected');
     let choiceNumber = 3;
     // this will get a number between 1-3 floor is used to get a number without decimals because
     // random returns a decimal number between 0-1 and we need to add + 1 so that we don't get 0
     // we could have solved this with 0-2 numbers but its more clear this way
     let randomNumber = Math.floor(Math.random() * choiceNumber) + 1;
     let computerChoice;
+
+
     switch (randomNumber) {
         case 1:
             computerChoice = "Rock"
+            rock.classList.add('selected');
             break;
         case 2:
             computerChoice = "Paper"
+            paper.classList.add('selected');
             break;
         case 3:
             computerChoice = "Scissors"
+            scissors.classList.add('selected');
             break;
     }
     return computerChoice;
 }
 
 function playRound(human, computer) {
+
     if (human === "Rock" && computer === "Rock") {
         return "tie";
     } else if (human === "Paper" && computer === "Paper") {
@@ -67,31 +85,51 @@ function playRound(human, computer) {
     }
 }
 
-function game() {
-
-    let humanScore = 0;
-    let computerScore = 0;
-    let bestOfFive = 0;
-    console.log("BEGIN");
-    for (let i = 0; i < 5; i++) {
-        let human = getHumanChoice();
-        let computer = getComputerChoice();
-        let result = playRound(human, computer)
-        if (result === "tie") {
-            console.log("TIE! " + `Humans = ${humanScore} - Computers = ${computerScore}`)
-        } else if (result === "win") {
-            humanScore++;
-            console.log("WIN! " + `Humans = ${humanScore} - Computers = ${computerScore}`)
-        } else if (result === "lose") {
-            computerScore++;
-            console.log("LOSE! " + `Humans = ${humanScore} chose = ${human} - Computers = ${computerScore} chose = ${computer} `)
-        }
+function game(human, computer, reuslt) {
+    const result = document.querySelector('.result')
+    if (humanScore === 5 || computerScore === 5) {
+        return;
     }
-    if (humanScore > computerScore) {
-        console.log("Humanity survived");
+    let resultOfGame = reuslt;
+    console.log(resultOfGame);
+    if (resultOfGame === "tie") {
+        result.innerText = `TIE! Humans = ${humanScore} - Computers = ${computerScore}`;
+    } else if (resultOfGame === "win") {
+        humanScore++;
+        console.log(humanScore);
+        result.innerText = `WIN! Humans = ${humanScore} - Computers = ${computerScore}`;
+    } else if (resultOfGame === "lose") {
+        computerScore++;
+        console.log(computerScore);
+        result.innerText = `LOSE! Humans = ${humanScore} - Computers = ${computerScore}`;
     } else {
-        console.log("Humanity is doomed")
+        result.innerText = 'hmm'
+    }
+    const playagain = document.querySelector('.playAgain');
+    if (humanScore === 5) {
+            result.innerText = `Humanity won suprasingly!`;
+            playagain.innerText = 'Want to save other people on different realities who lost to the machine? Reload the page.';
+    }
+    if (computerScore === 5) {
+        result.innerText = `Humanity is doomed!`;
+        playagain.innerText = 'Want to jump to another reality to try again? Then reload the page, I was too lazy too add buttons.';
+
     }
 }
 
-game();
+
+
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+function eventPlayer() {
+    humanChoice = getHumanChoice(this.value);
+    computerChoice = getComputerChoice();
+    game(humanChoice, computerChoice, playRound(humanChoice, computerChoice));
+}
+rock.addEventListener("click", eventPlayer, false)
+paper.addEventListener("click", eventPlayer, false)
+scissors.addEventListener("click", eventPlayer, false)
+
+
+
