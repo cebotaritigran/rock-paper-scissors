@@ -122,13 +122,19 @@ function game(human, computer, reuslt) {
 }
 
 
-
+const audio = new Audio("./buttonSound.wav");
 const rock = document.querySelector('#rock');
 const paper = document.querySelector('#paper');
 const scissors = document.querySelector('#scissors');
+
 function eventPlayer() {
     humanChoice = getHumanChoice(this.value);
     computerChoice = getComputerChoice();
+    audio.play();
+    setTimeout(function(){
+        audio.pause();
+    },
+    200);
     game(humanChoice, computerChoice, playRound(humanChoice, computerChoice));
 }
 rock.addEventListener("click", eventPlayer, false)

@@ -82,6 +82,7 @@ body {
 .humanButton:hover {
     background-color: #4CAF50;
     /* Green */
+    cursor: pointer;
     color: white;
 }
 
